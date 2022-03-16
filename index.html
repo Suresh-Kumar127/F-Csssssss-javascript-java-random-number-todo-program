@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>todo app</title>
+  </head>
+  <style>
+    #inner {
+      border: 2px solid green;
+      border-radius: 5px;
+    }
+    #title {
+      border: 1px solid #333;
+      color: white;
+      background-color: black;
+      border-radius: 5px;
+      font-size: 16px;
+      padding: 5px;
+      margin-bottom: 7px;
+    }
+    #discription {
+      border: 1px solid #333;
+      color: white;
+      background-color: black;
+      border-radius: 5px;
+      font-size: 16px;
+      padding: 5px;
+      margin-bottom: 7px;
+    }
+    #disc {
+      border: 1px solid #333;
+      color: white;
+      background-color: black;
+      border-radius: 5px;
+      font-size: 16px;
+      padding: 5px;
+      margin-bottom: 7px;
+    }
+  </style>
+  <body>
+    <div class="main">
+      <h2>My todos</h2>
+      <p>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="add title"
+        /><input
+          type="text"
+          name="description"
+          placeholder="description"
+          id="discription"
+        />
+        <button type="submit" value="Add Task" onclick="add()">Add task</button>
+      </p>
+    </div>
+
+    <div id="task">
+      <b>No list found</b>
+    </div>
+
+    <script>
+      var arr = [];
+      var mainDiv = document.getElementById("task");
+      // function complete() {
+      // }
+      function add() {
+        while (mainDiv.hasChildNodes()) {
+          mainDiv.removeChild(mainDiv.firstChild);
+        }
+        var title = document.getElementById("title");
+        var discription = document.getElementById("discription");
+        var listLayer = document.createElement("div");
+        listLayer.setAttribute("id", "inner");
+        var data = {
+          title: title.value,
+          discription: discription.value,
+        };
+        console.log(data);
+        arr.unshift({ title: title.value, discription: discription.value });
+        title.value = "";
+        discription.value = "";
+        console.log(arr);
+        for (var i = 0; i < arr.length; i++) {
+          var titletag = document.createElement("h2");
+          titletag.setAttribute("id", "title");
+          titletag.innerHTML = arr[i].title;
+          var discTag = document.createElement("p");
+          discTag.setAttribute("id", "disc");
+          discTag.innerHTML = arr[i].discription;
+          var btn = document.createElement("button");
+          //  btn.setAttribute("onclick", "complete()");
+          btn.onclick = function () {
+          
+        titletag.style.textDecoration = "underline";
+
+          };
+          btn.innerHTML = "Complete";
+
+          listLayer.appendChild(titletag);
+          listLayer.appendChild(discTag);
+          listLayer.appendChild(btn);
+          mainDiv.appendChild(listLayer);
+        }
+      }
+    </script>
+  </body>
+</html>
